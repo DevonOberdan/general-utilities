@@ -1,0 +1,16 @@
+{
+  "name": "com.finishone.general-utilities",
+  "version": "1.0.0",
+  "displayName": "General Utilities",
+  "description": "This package contains scripts shared across our projects.",
+  "unity": "2022.3",
+  "dependencies": {
+
+ },
+ "keywords": [
+    "utilities"
+  ],
+  "author": {
+    "name": "Finish One Games"
+  }
+}
