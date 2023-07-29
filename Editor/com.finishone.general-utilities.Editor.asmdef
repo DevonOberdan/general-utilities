@@ -1,7 +1,9 @@
 {
     "name": "com.finishone.general-utilities.Editor",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:5f846a1e39c1a9041916abd6bfcd7461"
+    ],
     "includePlatforms": [
         "Editor"
     ],

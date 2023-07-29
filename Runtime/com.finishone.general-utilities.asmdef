@@ -1,3 +1,14 @@
 {
-	"name": "com.finishone.general-utilities"
+    "name": "com.finishone.general-utilities",
+    "rootNamespace": "FinishOne.GeneralUtilities",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
