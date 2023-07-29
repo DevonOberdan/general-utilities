@@ -1,13 +1,10 @@
 {
   "name": "com.finishone.general-utilities",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "General Utilities",
   "description": "This package contains scripts shared across our projects.",
   "unity": "2022.3",
-  "dependencies": {
-
- },
- "keywords": [
+  "keywords": [
     "utilities"
   ],
   "author": {

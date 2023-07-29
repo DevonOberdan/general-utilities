@@ -11,22 +11,22 @@ public static class Events
 }
 
 
-public class PickupEvent : GameEvent
+public class PickupEvent : GameSystemEvent
 { 
    // public ItemPickup item;
 }
 
-public class InventoryChangedEvent : GameEvent
+public class InventoryChangedEvent : GameSystemEvent
 {
     public int itemId, itemCount;
 }
 
-public class SettingsChangedEvent : GameEvent
+public class SettingsChangedEvent : GameSystemEvent
 {
    // public Settings changedSettings;
 }
 
-public class AudioSettingsChangedEvent : GameEvent
+public class AudioSettingsChangedEvent : GameSystemEvent
 {
     public SettingsAudio changedSettings;
 }
