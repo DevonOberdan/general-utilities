@@ -21,11 +21,11 @@ namespace FinishOne.GeneralUtilities
 
         private Function EaseFunction;
 
+        private bool coolingDown;
+        private bool interacting;
+
         private float currentTime;
         private float decayFactor;
-        private bool coolingDown;
-
-        private bool interacting;
 
         const float MAX_TIME = 5f;
 
@@ -33,9 +33,11 @@ namespace FinishOne.GeneralUtilities
         private bool UseCurve => curvedBuffer && (Interacting || (!Interacting && !forceLinearDecay));
         private float Percentage => currentTime / totalSeconds;
 
-        public float CurrentTime {
+        public float CurrentTime 
+        {
             get => currentTime;
-            private set {
+            private set 
+            {
                 currentTime = Mathf.Clamp(value, 0, totalSeconds);
 
                 if (UseCurve)
@@ -48,9 +50,11 @@ namespace FinishOne.GeneralUtilities
             }
         }
 
-        public bool Interacting {
+        public bool Interacting 
+        {
             get => interacting;
-            set {
+            set 
+            {
 
                 if (value == interacting)
                     return;
