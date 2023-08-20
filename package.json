@@ -1,11 +1,18 @@
 {
   "name": "com.finishone.general-utilities",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "displayName": "General Utilities",
   "description": "This package contains scripts shared across our projects.",
   "unity": "2022.3",
   "keywords": [
     "utilities"
+  ],
+  "samples": [
+    {
+      "displayName": "Common Script Templates",
+      "description": "Our custom templates for standard script types as well as for our own custom scripts.",
+      "path": "Samples/CommonScriptTemplates"
+    }
   ],
   "author": {
     "name": "Finish One Games"
