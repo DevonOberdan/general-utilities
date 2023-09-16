@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using ScriptableObjectLibrary;
 using UnityEngine;
 
-public class AudioPlayRequester : MonoBehaviour
+namespace FinishOne.GeneralUtilities.Audio
 {
-    [SerializeField] AudioConfigSO defaultAudio;
-    [SerializeField] AudioPlayEventSO audioPlayEvent;
-
-    public void Request(AudioConfigSO requestedConfig=null)
+    public class AudioPlayRequester : MonoBehaviour
     {
-        if (requestedConfig != null)
-            audioPlayEvent.Raise(requestedConfig);
-        else
-            audioPlayEvent.Raise(defaultAudio);
+        [SerializeField] private AudioConfigSO defaultAudio;
+        [SerializeField] private AudioPlayEventSO audioPlayEvent;
+
+        public void Request(AudioConfigSO requestedConfig = null)
+        {
+            if (requestedConfig != null)
+                audioPlayEvent.Raise(requestedConfig);
+            else
+                audioPlayEvent.Raise(defaultAudio);
+        }
     }
 }

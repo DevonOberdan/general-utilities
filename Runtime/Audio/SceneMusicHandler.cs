@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneMusicHandler : MonoBehaviour
+namespace FinishOne.GeneralUtilities.Audio
 {
-    void Start()
+    public class SceneMusicHandler : MonoBehaviour
     {
-        GetComponent<AudioPlayRequester>().Request();
+        private void Start()
+        {
+            GetComponent<AudioPlayRequester>().Request();
+        }
     }
 }

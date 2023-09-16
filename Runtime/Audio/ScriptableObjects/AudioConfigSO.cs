@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-namespace ScriptableObjectLibrary {
-
+namespace FinishOne.GeneralUtilities.Audio
+{
     /* As you make more and more of these, if patterns emerge, like one shot type sound effects
      * all having virtually the same Config settings, then maybe make an inherited class that
      * has those defaults, like:
@@ -14,15 +11,13 @@ namespace ScriptableObjectLibrary {
      * OneShotAudioConfigSO
      * 
      * first will probably be a OneShot one and a Music one
-     * 
      */
-
-    [CreateAssetMenu(fileName = "AudioConfigSO", menuName = "Audio ScriptableObjects/AudioConfigSO", order=0)]
-    public class AudioConfigSO : DataConfigSO
+    [CreateAssetMenu(fileName = nameof(AudioConfigSO), menuName = "Audio/" + nameof(AudioConfigSO), order = 0)]
+    public class AudioConfigSO : ScriptableObject
     {
-        [SerializeField] AudioClip clip;
-        [SerializeField] bool oneShot;
-        [SerializeField] bool randomPitch;
+        [SerializeField] private AudioClip clip;
+        [SerializeField] private bool oneShot;
+        [SerializeField] private bool randomPitch;
 
         public AudioClip Clip => clip;
         public bool OneShot => oneShot;
