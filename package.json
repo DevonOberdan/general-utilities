@@ -1,6 +1,6 @@
 {
   "name": "com.finishone.general-utilities",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "displayName": "General Utilities",
   "description": "This package contains scripts shared across our projects.",
   "unity": "2022.3",
