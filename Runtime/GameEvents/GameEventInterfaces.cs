@@ -1,9 +1,12 @@
-public interface IEventListener
+namespace FinishOne.GeneralUtilities
 {
-    void RaiseEvent();
-}
+    public interface IEventListener
+    {
+        void RaiseEvent();
+    }
 
-public interface IEventListener<T>
-{
-    void RaiseEvent(T parameter);
+    public interface IEventListener<T>
+    {
+        void RaiseEvent(T parameter);
+    }
 }
