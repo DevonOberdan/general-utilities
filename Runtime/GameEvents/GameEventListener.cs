@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace FinishOne.GeneralUtilities
 {
-    public class GameEventListener : MonoBehaviour
+    public class GameEventListener : MonoBehaviour, IEventListener
     {
         public GameEvent gameEvent;
         public UnityEvent response;
@@ -29,12 +29,12 @@ namespace FinishOne.GeneralUtilities
         private void RegisterSelf() 
         {
             if(gameEvent != null)
-                gameEvent.Register(this);
+                gameEvent.RegisterListener(this);
         }
         private void UnregisterSelf()
         {
             if(gameEvent != null)   
-                gameEvent.Unregister(this);
+                gameEvent.UnregisterListener(this);
         }
 
         public void RaiseEvent() => response?.Invoke();

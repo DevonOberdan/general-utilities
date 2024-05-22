@@ -1,5 +1,5 @@
 {
-    "name": "com.finishone.general-utilities.Editor",
+    "name": "FinishOne.GeneralUtilities.Editor",
     "rootNamespace": "",
     "references": [
         "GUID:5f846a1e39c1a9041916abd6bfcd7461"

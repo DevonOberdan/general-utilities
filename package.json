@@ -1,6 +1,6 @@
 {
   "name": "com.finishone.general-utilities",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "displayName": "General Utilities",
   "description": "This package contains scripts shared across our projects.",
   "unity": "2022.3",
@@ -11,7 +11,7 @@
     {
       "displayName": "Common Script Templates",
       "description": "Our custom templates for standard script types as well as for our own custom scripts.",
-      "path": "Samples/CommonScriptTemplates"
+      "path": "Samples~/CommonScriptTemplates"
     }
   ],
   "author": {

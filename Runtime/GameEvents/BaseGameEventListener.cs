@@ -3,11 +3,6 @@ using UnityEngine.Events;
 
 namespace FinishOne.GeneralUtilities
 {
-    public interface IEventListener<T>
-    {
-        void RaiseEvent(T parameter);
-    }
-
     public abstract class BaseGameEventListener<TParameter, TGameEvent, TUnityEvent> : MonoBehaviour, IEventListener<TParameter>
         where TGameEvent : BaseGameEvent<TParameter>
         where TUnityEvent : UnityEvent<TParameter>

@@ -1,6 +1,6 @@
 {
-    "name": "com.finishone.general-utilities",
-    "rootNamespace": "FinishOne.GeneralUtilities",
+    "name": "FinishOne.GeneralUtilities.GameEvents",
+    "rootNamespace": "",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
