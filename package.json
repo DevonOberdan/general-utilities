@@ -11,7 +11,7 @@
     {
       "displayName": "Common Script Templates",
       "description": "Our custom templates for standard script types as well as for our own custom scripts.",
-      "path": "Samples/CommonScriptTemplates"
+      "path": "Samples~/CommonScriptTemplates"
     }
   ],
   "author": {

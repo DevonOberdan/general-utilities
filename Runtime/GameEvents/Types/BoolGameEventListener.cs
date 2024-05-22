@@ -2,5 +2,5 @@ using UnityEngine.Events;
 
 namespace FinishOne.GeneralUtilities
 {
-    public class GameEventBoolListener : BaseGameEventListener<bool, BoolGameEvent, UnityEvent<bool>> {}
+    public class BoolGameEventListener : BaseGameEventListener<bool, BoolGameEvent, UnityEvent<bool>> {}
 }
