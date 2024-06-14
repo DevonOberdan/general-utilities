@@ -10,15 +10,16 @@ namespace FinishOne.GeneralUtilities.Audio
         [SerializeField] private AudioMixer master;
 
         [SerializeField] private Vector2 pitchRange = new Vector2(0.8f, 1.2f);
-        private float oneShotDefaultPitch;
+        [SerializeField] private AudioPlayEventSO sfxPlayEvent, musicPlayEvent;
+
+        private float defaultSFXPitch;
         private const string MASTER_GROUP = "Master";
         private const string MUSIC_GROUP = "Music";
         private const string SFX_GROUP = "SFX";
         private const string VOLUME_SUFFIX = "Volume";
         private AudioSource sfxSource, musicSource;
 
-
-        [SerializeField] private AudioPlayEventSO sfxPlayEvent, musicPlayEvent;
+        //TODO: Implement audio pooling
         private List<GameObject> soundSourcePool;
         private GameObject soundSourceFactory;
 
@@ -27,7 +28,7 @@ namespace FinishOne.GeneralUtilities.Audio
             transform.GetChild(0).TryGetComponent(out sfxSource);
             transform.GetChild(1).TryGetComponent(out musicSource);
 
-            oneShotDefaultPitch = sfxSource.pitch;
+            defaultSFXPitch = sfxSource.pitch;
         }
 
         private void OnEnable()
@@ -62,23 +63,11 @@ namespace FinishOne.GeneralUtilities.Audio
 
         private float GetDecibelValueFromLinear(float linearValue) => linearValue == 0 ? -144f : 20.0f * Mathf.Log10(linearValue);
 
-        private void OneShot(AudioClip clip, float newPitch, float volume = 1)
-        {
-            sfxSource.pitch = newPitch;
-            sfxSource.PlayOneShot(clip, volume);
-            StopAllCoroutines();
-            StartCoroutine(ResetPitch(clip.length));
-        }
-
-        private void PlaySound(AudioClip clip) => OneShot(clip, oneShotDefaultPitch);
-        private void PlaySoundPitched(AudioClip clip, float pitch) => OneShot(clip, pitch);
-        private void PlaySoundRandomPitch(AudioClip clip) => OneShot(clip, Random.Range(pitchRange.x, pitchRange.y));
-
         private IEnumerator ResetPitch(float time)
         {
             yield return new WaitForSeconds(time + 0.05f);
             if (!sfxSource.isPlaying)
-                sfxSource.pitch = oneShotDefaultPitch;
+                sfxSource.pitch = defaultSFXPitch;
         }
 
         private void ChangeTrack(AudioConfigSO newTrack)
@@ -90,10 +79,29 @@ namespace FinishOne.GeneralUtilities.Audio
 
         private void CreateSound(AudioConfigSO audioToPlay)
         {
-            if (audioToPlay.RandomPitch)
-                PlaySoundRandomPitch(audioToPlay.Clip);
+            if (audioToPlay == null)
+                return;
+
+            float pitch = audioToPlay.RandomPitch ? Random.Range(pitchRange.x, pitchRange.y) : defaultSFXPitch;
+
+            bool differentPitch = sfxSource.pitch != pitch;
+            sfxSource.pitch = pitch;
+
+            if (audioToPlay.OneShot)
+            {
+                sfxSource.PlayOneShot(audioToPlay.Clip, 1);
+            }
             else
-                PlaySound(audioToPlay.Clip);
+            {
+                sfxSource.clip = audioToPlay.Clip;
+                sfxSource.Play();
+            }
+
+            if (differentPitch)
+            {
+                StopAllCoroutines();
+                StartCoroutine(ResetPitch(audioToPlay.Clip.length));
+            }
         }
     }
 }
