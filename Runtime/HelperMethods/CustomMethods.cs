@@ -26,6 +26,9 @@ namespace FinishOne.GeneralUtilities
             else
             {
 #if UNITY_EDITOR
+                if (PrefabUtility.IsPartOfPrefabAsset(parent))
+                    return null;
+
                 newObject = PrefabUtility.InstantiatePrefab(original, parent) as T;
 #endif
             }
