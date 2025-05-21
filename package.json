@@ -1,6 +1,6 @@
 {
   "name": "com.finishone.general-utilities",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "displayName": "General Utilities",
   "description": "This package contains scripts shared across our projects.",
   "unity": "2022.3",
@@ -12,6 +12,11 @@
       "displayName": "Common Script Templates",
       "description": "Our custom templates for standard script types as well as for our own custom scripts.",
       "path": "Samples~/CommonScriptTemplates"
+    },
+    {
+      "displayName": "Useful Presets",
+      "description": "Prefab, UI, and ScriptableObject presets for various systems in General Utilities (Audio, etc.)",
+      "path": "Samples~/Presets"
     }
   ],
   "author": {
