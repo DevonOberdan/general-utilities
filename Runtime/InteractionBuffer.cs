@@ -9,10 +9,13 @@ namespace FinishOne.GeneralUtilities
     {
         [SerializeField] private float totalSeconds = 1.25f;
         [SerializeField] private float decaySeconds = .5f;
-        [SerializeField] private float cooldownSeconds = 1f;
 
         public UnityEvent<float> OnPercentageChanged;
         public UnityEvent OnComplete;
+
+        public bool CooldownAndReset = true;
+
+        [DrawIf(nameof(CooldownAndReset), true)][SerializeField] private float cooldownSeconds = 1f;
 
         [SerializeField] private bool curvedBuffer;
 
@@ -29,13 +32,12 @@ namespace FinishOne.GeneralUtilities
 
         #region Properties
         private bool UseCurve => curvedBuffer && (Interacting || (!Interacting && !forceLinearDecay));
-        private float Percentage => currentTime / totalSeconds;
+        public float Percentage => currentTime / totalSeconds;
 
-        public float CurrentTime 
-        {
+        public float CurrentTime {
             get => currentTime;
-            private set 
-            {
+            set {
+                float previousTime = currentTime;
                 currentTime = Mathf.Clamp(value, 0, totalSeconds);
 
                 if (UseCurve)
@@ -43,16 +45,14 @@ namespace FinishOne.GeneralUtilities
                 else
                     OnPercentageChanged?.Invoke(Percentage);
 
-                if (currentTime >= totalSeconds)
+                if (currentTime >= totalSeconds && previousTime < totalSeconds)
                     OnComplete?.Invoke();
             }
         }
 
-        public bool Interacting 
-        {
+        public bool Interacting {
             get => interacting;
-            set 
-            {
+            set {
                 if (value == interacting)
                     return;
 
@@ -64,14 +64,18 @@ namespace FinishOne.GeneralUtilities
         }
         #endregion
 
-        void Start()
+        private void Start()
         {
             EaseFunction = GetEasingFunction(bufferEase);
             decayFactor = totalSeconds / decaySeconds;
-            OnComplete.AddListener(() => StartCoroutine(Cooldown()));
+
+            if (CooldownAndReset)
+            {
+                OnComplete.AddListener(() => StartCoroutine(Cooldown()));
+            }
         }
 
-        void Update()
+        private void Update()
         {
             if (coolingDown)
                 return;
@@ -80,7 +84,12 @@ namespace FinishOne.GeneralUtilities
             CurrentTime += Time.deltaTime * factor;
         }
 
-        IEnumerator Cooldown()
+        public void Complete()
+        {
+            CurrentTime = totalSeconds;
+        }
+
+        private IEnumerator Cooldown()
         {
             coolingDown = true;
             Interacting = false;
