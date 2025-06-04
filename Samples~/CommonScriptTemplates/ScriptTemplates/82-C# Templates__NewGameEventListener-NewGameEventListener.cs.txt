@@ -1,3 +1,4 @@
+using FinishOne.GeneralUtilities;
 using UnityEngine.Events;
 
-public class #SCRIPTNAME# : GameEventBaseListener<bool, GameEventBase, UnityEvent<bool>> { }
+public class #SCRIPTNAME# : BaseGameEventListener<bool, BaseGameEvent<bool>, UnityEvent<bool>> { }

@@ -27,8 +27,6 @@ namespace FinishOne.GeneralUtilities
         private float currentTime;
         private float decayFactor;
 
-        const float MAX_TIME = 5f;
-
         #region Properties
         private bool UseCurve => curvedBuffer && (Interacting || (!Interacting && !forceLinearDecay));
         private float Percentage => currentTime / totalSeconds;
@@ -55,7 +53,6 @@ namespace FinishOne.GeneralUtilities
             get => interacting;
             set 
             {
-
                 if (value == interacting)
                     return;
 
@@ -98,10 +95,6 @@ namespace FinishOne.GeneralUtilities
         {
             if (!curvedBuffer)
                 forceLinearDecay = false;
-
-            totalSeconds = Mathf.Clamp(totalSeconds, 0, MAX_TIME);
-            decaySeconds = Mathf.Clamp(decaySeconds, 0, MAX_TIME);
-            cooldownSeconds = Mathf.Clamp(cooldownSeconds, 0, MAX_TIME);
 
             decayFactor = totalSeconds / decaySeconds;
         }
