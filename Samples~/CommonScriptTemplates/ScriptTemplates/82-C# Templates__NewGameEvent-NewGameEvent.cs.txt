@@ -1,7 +1,5 @@
+using FinishOne.GeneralUtilities;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = nameof(#SCRIPTNAME#), menuName = "GameEvents/"+nameof(#SCRIPTNAME#), order=0)]
-public class #SCRIPTNAME# : GameEventBase<bool> {}
-{
-    
-}
+public class #SCRIPTNAME# : BaseGameEvent<bool> {}
