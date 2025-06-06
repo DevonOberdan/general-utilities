@@ -12,6 +12,7 @@ namespace FinishOne.GeneralUtilities
 
         public UnityEvent<float> OnPercentageChanged;
         public UnityEvent OnComplete;
+        public UnityEvent OnReset;
 
         public bool CooldownAndReset = true;
 
@@ -34,9 +35,11 @@ namespace FinishOne.GeneralUtilities
         private bool UseCurve => curvedBuffer && (Interacting || (!Interacting && !forceLinearDecay));
         public float Percentage => currentTime / totalSeconds;
 
-        public float CurrentTime {
+        public float CurrentTime 
+        {
             get => currentTime;
-            set {
+            set 
+            {
                 float previousTime = currentTime;
                 currentTime = Mathf.Clamp(value, 0, totalSeconds);
 
@@ -50,9 +53,11 @@ namespace FinishOne.GeneralUtilities
             }
         }
 
-        public bool Interacting {
+        public bool Interacting 
+        {
             get => interacting;
-            set {
+            set 
+            {
                 if (value == interacting)
                     return;
 
@@ -98,6 +103,7 @@ namespace FinishOne.GeneralUtilities
 
             currentTime = 0;
             coolingDown = false;
+            OnReset.Invoke();
         }
 
         private void OnValidate()
