@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using static FinishOne.GeneralUtilities.EasingFunction;
@@ -30,6 +29,8 @@ namespace FinishOne.GeneralUtilities
 
         private float currentTime;
         private float decayFactor;
+
+        private float currentCooldownTime;
 
         #region Properties
         private bool UseCurve => curvedBuffer && (Interacting || (!Interacting && !forceLinearDecay));
@@ -76,14 +77,17 @@ namespace FinishOne.GeneralUtilities
 
             if (CooldownAndReset)
             {
-                OnComplete.AddListener(() => StartCoroutine(Cooldown()));
+                OnComplete.AddListener(StartCooldown);
             }
         }
 
         private void Update()
         {
             if (coolingDown)
+            {
+                ProcessCooldown();
                 return;
+            }
 
             float factor = Interacting ? 1 : -1 * decayFactor;
             CurrentTime += Time.deltaTime * factor;
@@ -94,16 +98,24 @@ namespace FinishOne.GeneralUtilities
             CurrentTime = totalSeconds;
         }
 
-        private IEnumerator Cooldown()
+        private void ProcessCooldown()
+        {
+            currentCooldownTime += Time.deltaTime;
+
+            if(currentCooldownTime >= cooldownSeconds)
+            {
+                currentTime = 0;
+                currentCooldownTime = 0;
+                coolingDown = false;
+                OnReset.Invoke();
+            }
+        }
+
+        private void StartCooldown()
         {
             coolingDown = true;
             Interacting = false;
-
-            yield return new WaitForSeconds(cooldownSeconds);
-
-            currentTime = 0;
-            coolingDown = false;
-            OnReset.Invoke();
+            currentCooldownTime = 0;
         }
 
         private void OnValidate()
